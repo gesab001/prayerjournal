@@ -23,11 +23,13 @@ def createKey():
     backend=default_backend()
   )
   key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf once
-  json_file = open("password.json", "w")
-  json_data = {}
+  json_file = open("password.json")
+  json_data = json.load(json_file)
   json_data[password_provided] = key.decode('utf8').replace("'", '"')
-  json.dump(json_data, json_file)
   json_file.close()
+  outfile = open("password.json", "w")
+  json.dump(json_data, outfile)
+  outfile.close()
 
 #createKey()
   
