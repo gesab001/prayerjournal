@@ -62,10 +62,12 @@ def addPrayer(json_data):
  
 def decrypt(): 
   list = getPrayerList()
+  count = 1
   for x in list:
     message = x.encode('utf-8')
     decrypted = f.decrypt(message)
-    print(decrypted)
+    print(str(count) + ". " +decrypted.decode('utf8').replace("'", '"'))
+    count = count + 1
 
 
 while True:
