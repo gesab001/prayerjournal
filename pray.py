@@ -1,4 +1,5 @@
 import json
+from getpass import getpass
 import string
 import cryptography
 from cryptography.fernet import Fernet
@@ -11,7 +12,7 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
 def createKey():
-  password_provided = input("password: " ) # This is input in the form of a string
+  password_provided = getpass() # This is input in the form of a string
   password = password_provided.encode() # Convert to type bytes
   salt = os.urandom(16) # CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes
   kdf = PBKDF2HMAC(
@@ -31,7 +32,7 @@ def createKey():
 #createKey()
   
 def getKey():
-  password = input("password : ")
+  password = getpass()
   json_file = open("password.json")
   json_data = json.load(json_file)
   key = json_data[password]
@@ -48,14 +49,14 @@ def encrypt(message):
   
    
 def getPrayerList(): 
- json_file = open("prayers.json")
+ json_file = open("encrypted_prayers.json")
  data = json.load(json_file)
  json_file.close()
  list = data["prayers"]
  return list
  
 def addPrayer(json_data): 
- json_file = open("prayers.json", "w")
+ json_file = open("encrypted_prayers.json", "w")
  json.dump(json_data, json_file)
  json_file.close()
  
@@ -71,9 +72,9 @@ while True:
   text = input("Dear Lord Jesus,  " )
   if text=="exit":
      break
-  if text=="read":
+  elif text=="read":
      decrypt()	  
-  if text=="createpassword":
+  elif text=="createpassword":
      createKey() 
      key = getKey()	 
   else:
