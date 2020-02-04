@@ -89,36 +89,5 @@ while True:
   #for x in range(0, len(list)):
   #  print(str(x + 1) + ". " + list[x])
   
-  
-  
-
-def maskBadWord(word):
-   letters = list(string.ascii_lowercase)
-   wordList = list(word)
-   for x in range(0, len(wordList)):
-      letter = wordList[x]
-      #print("letter:" + letter)
-      letterindex = string.ascii_lowercase.index(letter.lower())
-      nextletterIndex = letterindex + 1
-      nextletter = letters[nextletterIndex]
-      wordList[x] = nextletter
-
-   newword = "".join(wordList)
-   return newword
-
-   
-def unmaskBadWord(word):
-   letters = list(string.ascii_lowercase)
-   wordList = list(word)
-   for x in range(0, len(wordList)):
-      letter = wordList[x]
-      #print("letter:" + letter)
-      letterindex = string.ascii_lowercase.index(letter.lower())
-      nextletterIndex = letterindex - 1
-      nextletter = letters[nextletterIndex]
-      wordList[x] = nextletter
-       
-   badword = "".join(wordList)
-   return badword
 
   
