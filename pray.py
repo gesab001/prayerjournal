@@ -5,12 +5,27 @@ import cryptography
 from cryptography.fernet import Fernet
 import base64
 import os
+import os.path
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 #key = Fernet.generate_key()
 
-
+def createFiles():   
+   passwordfile = open("password.json", "w")
+   json_data = {}
+   json_data["test"] = "test"
+   json.dump(json_data, passwordfile)
+   passwordfile.close()
+   prayerfile = open("encrypted_prayers.json", "w")
+   json_data = {}
+   json_data["prayers"] = []
+   json.dump(json_data, prayerfile)
+   prayerfile.close()
+ 
+if not os.path.exists("password.json"):
+   createFiles()
+ 
 def createKey():
   password_provided = getpass() # This is input in the form of a string
   password = password_provided.encode() # Convert to type bytes
